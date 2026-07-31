@@ -111,13 +111,17 @@
   .btn-ghost:hover{ border-color:var(--paper-dim); }
 
   .hero-meta{
-    margin-top:56px; display:grid; grid-template-columns:repeat(2,1fr); gap:0; max-width:420px;
+    margin-top:56px; display:grid; grid-template-columns:repeat(4,1fr); gap:0; max-width:640px;
     border-top:1px solid var(--line);
   }
   .hero-meta div{ padding:18px 20px 0 0; border-right:1px solid var(--line); }
   .hero-meta div:last-child{ border-right:none; }
   .hero-meta .num{ font-family:var(--font-mono); font-size:26px; color:var(--gold); }
   .hero-meta .lbl{ font-size:12px; color:var(--paper-dim); margin-top:4px; }
+  @media (max-width:700px){
+    .hero-meta{ grid-template-columns:repeat(2,1fr); }
+    .hero-meta div{ border-bottom:1px solid var(--line); padding-bottom:16px; }
+  }
 
   /* ---------- Section shared ---------- */
   section{ padding:64px 0; border-bottom:1px solid var(--line); }
@@ -211,7 +215,7 @@
   <section class="hero" style="border-bottom:none;">
     <div class="eyebrow">Available for new roles</div>
     <h1>Flutter engineer, built for the <span class="accent">rails money moves on.</span></h1>
-    <p class="hero-sub">Onkar Kulkarni — mobile engineer with 5+ years shipping production Flutter apps, specializing in <b>fintech and cross-border payments</b>. I care about the parts of fintech apps that can't afford to be wrong: auth, state, and the paths money actually travels.</p>
+    <p class="hero-sub">Onkar Kulkarni — mobile engineer with 5+ years shipping production Flutter apps, specializing in <b>fintech and cross-border payments</b>. I've helped build a live remittance platform processing $25B+ in transaction volume across 190+ countries and 48+ currencies — I care about the parts of fintech apps that can't afford to be wrong: auth, state, and the paths money actually travels.</p>
     <div class="hero-cta">
       <a class="btn btn-primary" href="mailto:onkarklkrn@gmail.com">Email me →</a>
       <a class="btn btn-ghost" href="#" download>Download résumé (PDF)</a>
@@ -219,7 +223,9 @@
 
     <div class="hero-meta">
       <div><div class="num">5+</div><div class="lbl">Years in production Flutter</div></div>
-      <div><div class="num">6</div><div class="lbl">Live apps shipped</div></div>
+      <div><div class="num">$25B+</div><div class="lbl">Transaction volume processed</div></div>
+      <div><div class="num">190+</div><div class="lbl">Countries served</div></div>
+      <div><div class="num">100K+</div><div class="lbl">App downloads</div></div>
     </div>
   </section>
 
@@ -230,7 +236,7 @@
     </div>
     <div class="about-grid">
       <div>
-        <p>I'm a <b>Flutter mobile engineer based in Pune, India</b>, currently building <b>Verto Pay</b>, a live cross-border remittance app, as part of a six-person engineering team. My focus is state management architecture — BLoC, clean architecture, and the kind of dependency structure that lets a fintech app change fast without breaking payment flows.</p>
+        <p>I'm a <b>Flutter mobile engineer based in Pune, India</b>, currently building <b>Verto Pay</b> — a live cross-border remittance app processing $25B+ in transaction volume across 190+ countries — as part of a six-person engineering team. My focus is state management architecture — BLoC, clean architecture, and the kind of dependency structure that lets a fintech app change fast without breaking payment flows.</p>
         <p>Before Verto, I spent years on <b>stock broking and trading platforms</b> at Greeksoft Technologies and Mplussoft Technologies — real-time data, order flows, and UI that has to stay correct under pressure. That background is why I default to defensive architecture: typed error handling, use-case boundaries, and dependency injection, rather than convenience shortcuts.</p>
         <p>I'm looking for teams building serious financial products who want someone who's already lived inside the failure modes — not someone learning them on the job.</p>
       </div>
@@ -253,32 +259,32 @@
     </div>
 
     <div class="ledger-entry">
-      <div class="ledger-id">ENTRY / 03<span class="dates">Current</span></div>
+      <div class="ledger-id">ENTRY / 03<span class="dates">Mar 2024 – Jul 2026</span></div>
       <div>
-        <div class="ledger-role">Flutter Mobile Engineer</div>
+        <div class="ledger-role">Software Engineer</div>
         <div class="ledger-co">Verto — cross-border payments</div>
-        <div class="ledger-desc">Building and maintaining Verto Pay, a live remittance app, on a six-person engineering team. Owned the QR-based login flow, led a GoRouter navigation migration, and drive BLoC-based state architecture decisions across the app.</div>
-        <div class="ledger-tags"><span>BLoC</span><span>GoRouter</span><span>Sentry</span><span>GitHub Actions</span><span>Fastlane</span><span>mParticle</span><span>PostHog</span></div>
+        <div class="ledger-desc">Core engineer on Verto's cross-border payments platform — a live remittance app with 100K+ downloads, processing <b style="color:var(--paper)">$25B+ in transaction volume across 190+ countries and 48+ currencies</b>. Architected the app on BLoC, Clean Architecture, and dependency injection (GetIt, Injectable). Spearheaded an app-wide GoRouter migration and led Flutter/Gradle upgrades across the app and custom plugins with zero regressions. Built Node.js/MongoDB REST services powering production features, and streamlined CI/CD (GitHub Actions, Sentry) to cut release time to under 30 minutes. Delivered stablecoin payment capabilities end-to-end — onboarding, beneficiary management, inbound payments, and Asia Corridor support — plus Roles &amp; Permissions, QR login, payment approvals, and scheduled/recurring payments with statement generation. Took exchange-rate home widgets from proof of concept to production, redesigned the Wallet and Beneficiary experiences, and integrated PostHog analytics.</div>
+        <div class="ledger-tags"><span>BLoC</span><span>Clean Architecture</span><span>GoRouter</span><span>Node.js</span><span>MongoDB</span><span>Sentry</span><span>GitHub Actions</span><span>Fastlane</span><span>mParticle</span><span>PostHog</span></div>
       </div>
     </div>
 
     <div class="ledger-entry">
-      <div class="ledger-id">ENTRY / 02<span class="dates">Prior</span></div>
+      <div class="ledger-id">ENTRY / 02<span class="dates">Feb 2023 – Mar 2024</span></div>
       <div>
-        <div class="ledger-role">Flutter Developer</div>
+        <div class="ledger-role">Software Developer</div>
         <div class="ledger-co">Greeksoft Technologies, Pune</div>
-        <div class="ledger-desc">Built and maintained mobile interfaces for stock broking and trading platforms — real-time market data rendering, order placement flows, and performance-sensitive UI.</div>
-        <div class="ledger-tags"><span>Flutter</span><span>Trading UI</span><span>Real-time data</span></div>
+        <div class="ledger-desc">Delivered mobile applications to the Play Store and App Store using Riverpod and MobX for state management, with offline-first data storage via ObjectBox. Implemented REST API integrations, payment gateway functionality, and real-time features using WebSockets and reactive Dart streams. Integrated Firebase (Auth, Database, Messaging) and shipped responsive, cross-platform UI including a Flutter web deployment.</div>
+        <div class="ledger-tags"><span>Riverpod</span><span>MobX</span><span>ObjectBox</span><span>WebSockets</span><span>Firebase</span><span>Flutter Web</span></div>
       </div>
     </div>
 
     <div class="ledger-entry">
-      <div class="ledger-id">ENTRY / 01<span class="dates">Prior</span></div>
+      <div class="ledger-id">ENTRY / 01<span class="dates">Sep 2021 – Jan 2023</span></div>
       <div>
         <div class="ledger-role">Flutter Developer</div>
         <div class="ledger-co">Mplussoft Technologies, Pune</div>
-        <div class="ledger-desc">Early career work on stock broking platform features, building foundational Flutter and state-management skills in a fast-moving fintech codebase.</div>
-        <div class="ledger-tags"><span>Flutter</span><span>Dart</span><span>Broking systems</span></div>
+        <div class="ledger-desc">Developed cross-platform mobile applications end-to-end, from UI to deployment, collaborating directly with backend and design teams. Integrated REST APIs and implemented state management for production apps on Android and iOS. Wrote unit tests, used Git for version control, and optimized app performance across a range of device sizes and OS versions.</div>
+        <div class="ledger-tags"><span>Flutter</span><span>Dart</span><span>REST APIs</span><span>Unit Testing</span></div>
       </div>
     </div>
   </section>
@@ -362,7 +368,7 @@
     <div class="foot-links">
       <a href="mailto:onkarklkrn@gmail.com">onkarklkrn@gmail.com</a>
       <a href="tel:+919657241973">+91 96572 41973</a>
-      <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener" class="fill-me">LinkedIn ↗</a>
+      <a href="https://linkedin.com/in/onkar-kulkarni13" target="_blank" rel="noopener">LinkedIn ↗</a>
     </div>
     <div class="foot-bottom">
       <span>Onkar Kulkarni — Pune, India</span>
