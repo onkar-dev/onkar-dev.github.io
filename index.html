@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Onkar Kulkarni — Flutter Engineer, Cross-Border Payments</title>
+<meta name="description" content="Flutter mobile engineer specializing in fintech and cross-border payments. BLoC architecture, clean architecture, and production remittance systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0a0e2a;
+    --panel:#131a3d;
+    --panel-2:#0e1332;
+    --line:rgba(234,231,220,0.12);
+    --paper:#eae7dc;
+    --paper-dim:rgba(234,231,220,0.62);
+    --gold:#d4a73a;
+    --teal:#4fb3a9;
+    --red:#c05a4a;
+    --font-display:'Newsreader', serif;
+    --font-body:'Space Grotesk', sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--font-body);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  ::selection{background:var(--gold);color:var(--ink);}
+
+  /* Focus visibility */
+  a:focus-visible, button:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- Ticker ---------- */
+  .ticker-wrap{
+    position:sticky; top:0; z-index:50;
+    background:var(--panel-2);
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+    white-space:nowrap;
+    padding:9px 0;
+  }
+  .ticker{
+    display:inline-block;
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    letter-spacing:0.02em;
+    animation:scroll-left 38s linear infinite;
+  }
+  .ticker span{ padding:0 22px; color:var(--paper-dim); }
+  .ticker span b{ color:var(--gold); font-weight:600; }
+  .ticker span.up{ color:var(--teal); }
+  @keyframes scroll-left{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+  }
+
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 28px; }
+
+  /* ---------- Nav ---------- */
+  nav{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:22px 0 0;
+  }
+  .brand{ font-family:var(--font-mono); font-size:14px; color:var(--paper-dim); letter-spacing:0.04em; }
+  .brand b{ color:var(--paper); }
+  .navlinks{ display:flex; gap:26px; font-size:13.5px; }
+  .navlinks a{ text-decoration:none; color:var(--paper-dim); transition:color 0.2s; }
+  .navlinks a:hover{ color:var(--gold); }
+  @media (max-width:640px){ .navlinks{ display:none; } }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding:88px 0 70px; border-bottom:1px solid var(--line); }
+  .eyebrow{
+    font-family:var(--font-mono); font-size:12.5px; color:var(--teal);
+    letter-spacing:0.12em; text-transform:uppercase; margin-bottom:22px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{ content:''; width:7px; height:7px; border-radius:50%; background:var(--teal); display:inline-block; box-shadow:0 0 0 3px rgba(79,179,169,0.18); }
+  h1{
+    font-family:var(--font-display); font-weight:500; font-style:italic;
+    font-size:clamp(38px, 6vw, 68px); line-height:1.08; letter-spacing:-0.01em;
+    max-width:15ch;
+  }
+  h1 .accent{ font-style:normal; color:var(--gold); }
+  .hero-sub{
+    margin-top:26px; font-size:17px; color:var(--paper-dim); max-width:56ch; line-height:1.65;
+  }
+  .hero-sub b{ color:var(--gold); font-weight:600; }
+  .hero-cta{ margin-top:36px; display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{
+    font-family:var(--font-mono); font-size:13px; letter-spacing:0.03em;
+    padding:13px 22px; border-radius:2px; text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px; transition:all 0.2s;
+    border:1px solid var(--line);
+  }
+  .btn-primary{ background:var(--gold); color:var(--ink); border-color:var(--gold); font-weight:600; }
+  .btn-primary:hover{ background:#e3ba55; }
+  .btn-ghost{ color:var(--paper); }
+  .btn-ghost:hover{ border-color:var(--paper-dim); }
+
+  .hero-meta{
+    margin-top:56px; display:grid; grid-template-columns:repeat(2,1fr); gap:0; max-width:420px;
+    border-top:1px solid var(--line);
+  }
+  .hero-meta div{ padding:18px 20px 0 0; border-right:1px solid var(--line); }
+  .hero-meta div:last-child{ border-right:none; }
+  .hero-meta .num{ font-family:var(--font-mono); font-size:26px; color:var(--gold); }
+  .hero-meta .lbl{ font-size:12px; color:var(--paper-dim); margin-top:4px; }
+
+  /* ---------- Section shared ---------- */
+  section{ padding:64px 0; border-bottom:1px solid var(--line); }
+  .sec-head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:38px; flex-wrap:wrap; gap:10px; }
+  .sec-title{ font-family:var(--font-display); font-style:italic; font-size:30px; font-weight:500; }
+  .sec-tag{ font-family:var(--font-mono); font-size:12px; color:var(--paper-dim); letter-spacing:0.08em; text-transform:uppercase; }
+
+  /* ---------- About ---------- */
+  .about-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px; }
+  .about-grid p{ color:var(--paper-dim); font-size:15.5px; margin-bottom:16px; }
+  .about-grid p b{ color:var(--paper); font-weight:600; }
+  .about-side{ font-family:var(--font-mono); font-size:13px; color:var(--paper-dim); }
+  .about-side .row{ display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px dashed var(--line); }
+  .about-side .row span:last-child{ color:var(--paper); }
+  @media (max-width:800px){ .about-grid{ grid-template-columns:1fr; gap:30px; } }
+
+  /* ---------- Ledger (experience) ---------- */
+  .ledger-entry{
+    display:grid; grid-template-columns:110px 1fr; gap:24px;
+    padding:26px 0; border-top:1px solid var(--line);
+  }
+  .ledger-entry:last-child{ border-bottom:1px solid var(--line); }
+  .ledger-id{ font-family:var(--font-mono); font-size:12px; color:var(--gold); }
+  .ledger-id .dates{ display:block; color:var(--paper-dim); margin-top:6px; font-size:11.5px; }
+  .ledger-role{ font-size:18px; font-weight:600; }
+  .ledger-co{ color:var(--teal); font-size:14px; margin-top:2px; }
+  .ledger-desc{ margin-top:12px; color:var(--paper-dim); font-size:14.5px; max-width:70ch; }
+  .ledger-tags{ margin-top:14px; display:flex; gap:8px; flex-wrap:wrap; }
+  .ledger-tags span{
+    font-family:var(--font-mono); font-size:11px; padding:4px 9px;
+    border:1px solid var(--line); border-radius:2px; color:var(--paper-dim);
+  }
+  @media (max-width:640px){ .ledger-entry{ grid-template-columns:1fr; } }
+
+  /* ---------- Case studies ---------- */
+  .case{
+    border:1px solid var(--line); border-radius:3px; padding:32px;
+    margin-bottom:20px; background:var(--panel);
+    position:relative; overflow:hidden;
+  }
+  .case::before{
+    content:attr(data-mark); position:absolute; right:24px; top:20px;
+    font-family:var(--font-mono); font-size:44px; color:var(--line); font-weight:600;
+  }
+  .case-label{ font-family:var(--font-mono); font-size:11.5px; color:var(--teal); text-transform:uppercase; letter-spacing:0.08em; }
+  .case h3{ font-size:22px; margin-top:10px; max-width:22ch; }
+  .case-cols{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:22px; margin-top:20px; }
+  .case-cols div span{ display:block; font-family:var(--font-mono); font-size:10.5px; color:var(--paper-dim); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:6px; }
+  .case-cols div p{ font-size:14px; color:var(--paper-dim); }
+  @media (max-width:700px){ .case-cols{ grid-template-columns:1fr; } }
+
+  /* ---------- Skills ---------- */
+  .skill-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  @media (max-width:800px){ .skill-grid{ grid-template-columns:repeat(2,1fr); } }
+  .skill-cell{ background:var(--ink); padding:24px; }
+  .skill-cell h4{ font-family:var(--font-mono); font-size:12px; color:var(--gold); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:14px; }
+  .skill-cell ul{ list-style:none; }
+  .skill-cell li{ font-size:14.5px; color:var(--paper-dim); padding:5px 0; }
+  .skill-cell li b{ color:var(--paper); font-weight:500; }
+  .skill-cell{ padding:24px 24px 28px; }
+  @media (max-width:640px){ .skill-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- Contact / footer ---------- */
+  footer{ padding:70px 0 50px; }
+  .foot-title{ font-family:var(--font-display); font-style:italic; font-size:clamp(30px,4vw,44px); max-width:16ch; }
+  .foot-links{ margin-top:30px; display:flex; gap:28px; flex-wrap:wrap; }
+  .foot-links a{ text-decoration:none; font-family:var(--font-mono); font-size:14px; border-bottom:1px solid var(--line); padding-bottom:4px; transition:border-color 0.2s, color 0.2s; }
+  .foot-links a:hover{ border-color:var(--gold); color:var(--gold); }
+  .foot-bottom{ margin-top:60px; display:flex; justify-content:space-between; font-size:12px; color:var(--paper-dim); font-family:var(--font-mono); flex-wrap:wrap; gap:10px; }
+
+  .fill-me{ color:var(--red); }
+</style>
+</head>
+<body>
+
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker" id="tickerTrack"></div>
+</div>
+
+<div class="wrap">
+  <nav>
+    <div class="brand">OK<span style="opacity:0.4">/</span><b>PORTFOLIO</b></div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#ledger">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <section class="hero" style="border-bottom:none;">
+    <div class="eyebrow">Available for new roles</div>
+    <h1>Flutter engineer, built for the <span class="accent">rails money moves on.</span></h1>
+    <p class="hero-sub">Onkar Kulkarni — mobile engineer with 5+ years shipping production Flutter apps, specializing in <b>fintech and cross-border payments</b>. I care about the parts of fintech apps that can't afford to be wrong: auth, state, and the paths money actually travels.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="mailto:onkarklkrn@gmail.com">Email me →</a>
+      <a class="btn btn-ghost" href="#" download>Download résumé (PDF)</a>
+    </div>
+
+    <div class="hero-meta">
+      <div><div class="num">5+</div><div class="lbl">Years in production Flutter</div></div>
+      <div><div class="num">6</div><div class="lbl">Live apps shipped</div></div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="sec-head">
+      <div class="sec-title">Statement of account</div>
+      <div class="sec-tag">01 — About</div>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>I'm a <b>Flutter mobile engineer based in Pune, India</b>, currently building <b>Verto Pay</b>, a live cross-border remittance app, as part of a six-person engineering team. My focus is state management architecture — BLoC, clean architecture, and the kind of dependency structure that lets a fintech app change fast without breaking payment flows.</p>
+        <p>Before Verto, I spent years on <b>stock broking and trading platforms</b> at Greeksoft Technologies and Mplussoft Technologies — real-time data, order flows, and UI that has to stay correct under pressure. That background is why I default to defensive architecture: typed error handling, use-case boundaries, and dependency injection, rather than convenience shortcuts.</p>
+        <p>I'm looking for teams building serious financial products who want someone who's already lived inside the failure modes — not someone learning them on the job.</p>
+      </div>
+      <div class="about-side">
+        <div class="row"><span>Based in</span><span>Pune, India</span></div>
+        <div class="row"><span>Core stack</span><span>Flutter · Dart · BLoC</span></div>
+        <div class="row"><span>Domain</span><span>Fintech / cross-border payments</span></div>
+        <div class="row"><span>Current</span><span>Verto — Verto Pay</span></div>
+        <div class="row"><span>Prior</span><span>Greeksoft · Mplussoft</span></div>
+        <div class="row"><span>Tooling</span><span>Sentry · GH Actions · Fastlane</span></div>
+        <div class="row"><span>Analytics</span><span>mParticle · PostHog</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ledger">
+    <div class="sec-head">
+      <div class="sec-title">Ledger of record</div>
+      <div class="sec-tag">02 — Experience</div>
+    </div>
+
+    <div class="ledger-entry">
+      <div class="ledger-id">ENTRY / 03<span class="dates">Current</span></div>
+      <div>
+        <div class="ledger-role">Flutter Mobile Engineer</div>
+        <div class="ledger-co">Verto — cross-border payments</div>
+        <div class="ledger-desc">Building and maintaining Verto Pay, a live remittance app, on a six-person engineering team. Owned the QR-based login flow, led a GoRouter navigation migration, and drive BLoC-based state architecture decisions across the app.</div>
+        <div class="ledger-tags"><span>BLoC</span><span>GoRouter</span><span>Sentry</span><span>GitHub Actions</span><span>Fastlane</span><span>mParticle</span><span>PostHog</span></div>
+      </div>
+    </div>
+
+    <div class="ledger-entry">
+      <div class="ledger-id">ENTRY / 02<span class="dates">Prior</span></div>
+      <div>
+        <div class="ledger-role">Flutter Developer</div>
+        <div class="ledger-co">Greeksoft Technologies, Pune</div>
+        <div class="ledger-desc">Built and maintained mobile interfaces for stock broking and trading platforms — real-time market data rendering, order placement flows, and performance-sensitive UI.</div>
+        <div class="ledger-tags"><span>Flutter</span><span>Trading UI</span><span>Real-time data</span></div>
+      </div>
+    </div>
+
+    <div class="ledger-entry">
+      <div class="ledger-id">ENTRY / 01<span class="dates">Prior</span></div>
+      <div>
+        <div class="ledger-role">Flutter Developer</div>
+        <div class="ledger-co">Mplussoft Technologies, Pune</div>
+        <div class="ledger-desc">Early career work on stock broking platform features, building foundational Flutter and state-management skills in a fast-moving fintech codebase.</div>
+        <div class="ledger-tags"><span>Flutter</span><span>Dart</span><span>Broking systems</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sec-head">
+      <div class="sec-title">Instruments &amp; rates</div>
+      <div class="sec-tag">03 — Skills</div>
+    </div>
+    <div class="skill-grid">
+      <div class="skill-cell">
+        <h4>Languages &amp; frameworks</h4>
+        <ul>
+          <li><b>Dart</b></li>
+          <li><b>Flutter</b></li>
+          <li><b>JavaScript</b></li>
+          <li><b>Node.js</b></li>
+        </ul>
+      </div>
+      <div class="skill-cell">
+        <h4>Backend &amp; APIs</h4>
+        <ul>
+          <li><b>REST API design</b></li>
+          <li><b>MongoDB</b></li>
+          <li><b>Retrofit</b></li>
+          <li><b>Payment gateway integration</b></li>
+        </ul>
+      </div>
+      <div class="skill-cell">
+        <h4>Architecture</h4>
+        <ul>
+          <li><b>BLoC</b></li>
+          <li><b>Provider</b></li>
+          <li><b>Riverpod</b></li>
+          <li><b>MobX</b></li>
+          <li><b>Redux</b></li>
+          <li><b>MVVM</b></li>
+          <li><b>Clean architecture</b></li>
+          <li><b>Dependency injection</b></li>
+          <li><b>SOLID principles</b></li>
+        </ul>
+      </div>
+      <div class="skill-cell">
+        <h4>Mobile tooling</h4>
+        <ul>
+          <li><b>Dio</b></li>
+          <li><b>GetIt</b></li>
+          <li><b>Injectable</b></li>
+          <li><b>Freezed</b></li>
+          <li><b>GoRouter</b></li>
+          <li><b>Firebase</b></li>
+          <li><b>ObjectBox</b></li>
+        </ul>
+      </div>
+      <div class="skill-cell">
+        <h4>DevOps &amp; testing</h4>
+        <ul>
+          <li><b>CI/CD pipelines</b></li>
+          <li><b>GitHub Actions</b></li>
+          <li><b>Fastlane</b></li>
+          <li><b>Sentry</b></li>
+          <li><b>Integration &amp; automation testing</b></li>
+          <li><b>Git</b></li>
+        </ul>
+      </div>
+      <div class="skill-cell">
+        <h4>Analytics &amp; practices</h4>
+        <ul>
+          <li><b>mParticle</b></li>
+          <li><b>PostHog</b></li>
+          <li><b>Agile / Scrum</b></li>
+          <li><b>Jira</b></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="sec-tag" style="margin-bottom:16px;">04 — Contact</div>
+    <div class="foot-title">Open to Flutter, fintech &amp; other roles — let's talk.</div>
+    <div class="foot-links">
+      <a href="mailto:onkarklkrn@gmail.com">onkarklkrn@gmail.com</a>
+      <a href="tel:+919657241973">+91 96572 41973</a>
+      <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener" class="fill-me">LinkedIn ↗</a>
+    </div>
+    <div class="foot-bottom">
+      <span>Onkar Kulkarni — Pune, India</span>
+      <span>Last updated 2026</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+  // Build the ticker content twice for a seamless loop
+  const items = [
+    {pair:'FLUTTER/DART', rate:'5.0Y', up:true},
+    {pair:'BLOC/ARCH', rate:'PROD', up:true},
+    {pair:'CLEAN-ARCH/DARTZ', rate:'STABLE', up:true},
+    {pair:'GOROUTER/NAV', rate:'MIGRATED', up:true},
+    {pair:'SENTRY/CRASH-FREE', rate:'MONITORED', up:true},
+    {pair:'FASTLANE/CI', rate:'AUTOMATED', up:true},
+    {pair:'VERTO-PAY/REMIT', rate:'LIVE', up:true},
+    {pair:'BROKING-UI/RT-DATA', rate:'SHIPPED', up:true},
+  ];
+  const track = document.getElementById('tickerTrack');
+  const html = items.map(i => `<span>${i.pair} <b>${i.rate}</b> <span class="up">▲</span></span>`).join('');
+  track.innerHTML = html + html; // duplicate for seamless scroll
+</script>
+
+</body>
+</html>
